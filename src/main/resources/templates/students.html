@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Students</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+            padding: 30px 20px;
+            margin: 0;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 25px 30px;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+        }
+
+        a.add-new {
+            display: inline-block;
+            margin-bottom: 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        a.add-new:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+
+        thead {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        td.actions a {
+            margin-right: 10px;
+            text-decoration: none;
+            color: #4CAF50;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        td.actions a:hover {
+            color: #388e3c;
+        }
+
+        /* Responsive: horizontal scroll on small screens */
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px 10px;
+            }
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                display: none; /* Hide table header on small */
+            }
+            tbody tr {
+                margin-bottom: 20px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                padding: 15px;
+            }
+            tbody td {
+                padding-left: 50%;
+                position: relative;
+                text-align: right;
+                border: none;
+                border-bottom: 1px solid #eee;
+            }
+            tbody td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 15px;
+                width: 45%;
+                padding-left: 10px;
+                font-weight: 700;
+                text-align: left;
+                color: #555;
+            }
+            td.actions {
+                text-align: center;
+                padding-left: 15px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>All Students</h1>
+    <a th:href="@{/students/new}" class="add-new">Add New Student</a>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Roll</th>
+            <th>Department</th>
+            <th>Session</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${students}">
+            <td data-label="ID" th:text="${student.id}"></td>
+            <td data-label="Name" th:text="${student.name}"></td>
+            <td data-label="Roll" th:text="${student.roll}"></td>
+            <td data-label="Department" th:text="${student.department}"></td>
+            <td data-label="Session" th:text="${student.session}"></td>
+            <td class="actions" data-label="Actions">
+                <a th:href="@{'/students/records/' + ${student.id}}"> Attendance </a> |
+                <a th:href="@{'/students/delete/' + ${student.id}}"
+                   onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

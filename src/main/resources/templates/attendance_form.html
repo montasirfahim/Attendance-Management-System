@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mark Attendance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        input[type="date"],
+        select {
+            padding: 8px;
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .form-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .form-row div {
+            flex: 1;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Attendance Form</h2>
+
+<form action="/attendance/save" method="post">
+    <div class="form-row">
+        <div>
+            <label>Date:</label>
+            <input type="date" name="date" required>
+        </div>
+        <div>
+            <label>Select Attendance Count:</label>
+            <select name="classCount" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+    </div>
+
+    <table>
+        <tr>
+            <th>Student Name</th>
+            <th>Roll</th>
+            <th>Status</th>
+        </tr>
+        <tr th:each="student, iterStat : ${students}">
+            <td th:text="${student.name}"></td>
+            <td th:text="${student.roll}"></td>
+            <td>
+                <input type="hidden" name="studentIds" th:value="${student.id}" />
+                <select name="statuses">
+                    <option value="PRESENT">Present</option>
+                    <option value="ABSENT">Absent</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+
+    <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>

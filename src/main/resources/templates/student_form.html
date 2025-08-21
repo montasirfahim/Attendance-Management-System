@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Form</title>
+    <style>
+        /* Basic reset */
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f9f9f9;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        form {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            width: 350px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #555;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 18px;
+            border: 1.5px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Optional: spacing for hidden input */
+        input[type="hidden"] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<form th:action="@{/students/save}" th:object="${student}" method="post">
+    <h2>New Student</h2>
+    <input type="hidden" th:if="${student.id} != null" th:field="*{id}" />
+
+    <label for="name">Name:</label>
+    <input id="name" type="text" th:field="*{name}" required/>
+
+    <label for="roll">Roll:</label>
+    <input id="roll" type="text" th:field="*{roll}" required/>
+
+    <label for="department">Department:</label>
+    <input id="department" type="text" th:field="*{department}" required/>
+
+    <label for="session">Session:</label>
+    <input id="session" type="text" th:field="*{session}" required/>
+
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

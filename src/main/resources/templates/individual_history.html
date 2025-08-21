@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:margin-left="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Individual Records</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+    .date {
+      display: flex;           /* Make the container a flexbox */
+      align-items: center;     /* Vertically center the items */
+      justify-content: center;
+      gap: 10px;               /* Optional: space between items */
+      margin-top: 50px;
+      margin-bottom: 50px;
+    }
+    table {
+      width: 60%;
+      border-collapse: collapse;
+      margin: auto;
+    }
+    th, td {
+      border: 1px solid #999;
+      padding: 10px;
+      text-align: center;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    h2 {
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+<h2>Individual Attendance History</h2>
+<div class="date">
+  <form th:action="@{/attendance/list}" method="get">
+    <label for="roll">Select Roll:</label>
+    <input type="text" id="roll" name="roll" required>
+    <button type="submit" style="margin-left: 10px; padding: 6px 12px; border: none; background-color: #4CAF50; color: white; border-radius: 4px;">View</button>
+  </form>
+
+  <button onclick="window.location.href='/'" style="margin-left: 10px; padding: 6px 12px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 4px; border: none; display: inline-block; line-height: normal">Back to Home</button>
+</div>
+<h2>Attendance for <span th:text="${selectedDate}"></span></h2>
+
+<table>
+  <tr>
+    <th>Student Name</th>
+    <th>Roll</th>
+    <th>Status</th>
+    <th>Attendance Count</th>
+  </tr>
+  <tr th:each="record : ${attendances}">
+    <td th:text="${record.student.name}"></td>
+    <td th:text="${record.student.roll}"></td>
+    <td th:text="${record.status}"></td>
+    <td th:text="${record.classCount}"></td> <!-- Show class_count field -->
+  </tr>
+</table>
+</body>
+</html>

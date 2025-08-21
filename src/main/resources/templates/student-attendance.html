@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Attendance of [[${student.name}]]</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: #f9f9f9;
+      color: #333;
+    }
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: white;
+      padding: 25px 30px;
+      border-radius: 8px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .info {
+      margin-bottom: 20px;
+    }
+    .info p {
+      margin: 6px 0;
+    }
+    .stats {
+      background: #4CAF50;
+      color: white;
+      padding: 15px;
+      border-radius: 6px;
+      font-size: 18px;
+    }
+    .stats p {
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Attendance Details</h2>
+
+  <div class="info">
+    <p><strong>Name:</strong> <span th:text="${student.name}"></span></p>
+    <p><strong>Roll:</strong> <span th:text="${student.roll}"></span></p>
+    <p><strong>Department:</strong> <span th:text="${student.department}"></span></p>
+    <p><strong>Session:</strong> <span th:text="${student.session}"></span></p>
+  </div>
+
+  <div class="stats">
+    <p><strong>Total Classes:</strong> <span th:text="${totalClasses}"></span></p>
+    <p><strong>Present:</strong> <span th:text="${presentClasses}"></span></p>
+    <p><strong>Absent:</strong> <span th:text="${absentClasses}"></span></p>
+    <p><strong>Attendance Percentage:</strong> <span th:text="${attendancePercentage}"></span>%</p>
+  </div>
+</div>
+</body>
+</html>
