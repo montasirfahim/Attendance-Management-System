@@ -8,6 +8,6 @@
 3. Add, Update or Delete Student
 4. Take Attendance with Explicit Class Count
 5. View Attendance Records by Date & Student ID
-
+6. Many more to come
 ---
 
