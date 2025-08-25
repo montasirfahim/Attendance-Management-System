@@ -38,7 +38,7 @@ public class AttendanceService {
 
     public Integer getClassCountByDate(LocalDate date) {
         List<Integer> classCounts = attendanceRepository.findClassCountsByDate(date);
-        return classCounts.isEmpty() ? null : classCounts.getFirst();
+        return classCounts.isEmpty() ? null : classCounts.get(0);
     }
 
 }
